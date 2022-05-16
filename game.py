@@ -58,7 +58,7 @@ class Character(Sprite):
         self.right_view = True
         self.is_ground = False
         self.is_jump = False
-        self.jump_frames = 60
+        self.jump_frames = 30
 
     def move(self, keys):
         if keys[pygame.K_a]:
@@ -71,17 +71,17 @@ class Character(Sprite):
                 self.right_view = True
                 self.flip(1, 0)
             self.rect.x += self.speed
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] and self.is_ground:
             self.is_jump = True
         if not self.is_ground and not self.is_jump:
             self.rect.y += self.speed
         if self.is_jump:
             if self.jump_frames > 0:
-                self.rect.y -= self.speed
+                self.rect.y -= self.speed * 2
                 self.jump_frames -= 1
             else:
                 self.is_jump = False
-                self.jump_frames = 60
+                self.jump_frames = 30
         
         
 
