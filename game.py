@@ -77,7 +77,7 @@ class Character(Sprite):
             self.rect.y += self.speed
         if self.is_jump:
             if self.jump_frames > 0:
-                self.rect.y -= self.speed * 2
+                self.rect.y -= self.speed
                 self.jump_frames -= 1
             else:
                 self.is_jump = False
