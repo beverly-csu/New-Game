@@ -51,16 +51,21 @@ class Character(Sprite):
     def __init__(self, filename, speed=1):
         super().__init__(filename)
         self.speed = speed
-        self.directions = [False, False, False, False]
         self.right_view = True
 
     def move(self, keys):
         if keys[pygame.K_a]:
+            if self.right_view:
+                self.right_view = False
+                self.flip(1, 0)
             self.rect.x -= self.speed
         if keys[pygame.K_d]:
+            if not self.right_view:
+                self.right_view = False
+                self.flip(1, 0)
             self.rect.x += self.speed
         if keys[pygame.K_w]:
-            passsss
+            pass
 
 
 
@@ -76,7 +81,7 @@ while runtime:
     score.draw(mw)
 
     events = pygame.event.get()
-    star.move(events)
+    star.move(pygame.key.get_pressed())
     for event in events:
         if event.type == pygame.QUIT:
             runtime = False
