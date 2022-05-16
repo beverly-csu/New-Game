@@ -60,7 +60,7 @@ class Character(Sprite):
         if keys[pygame.K_d]:
             self.rect.x += self.speed
         if keys[pygame.K_w]:
-            pass
+            passsss
 
 
 
