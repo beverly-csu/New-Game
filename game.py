@@ -40,8 +40,12 @@ class Sprite(pygame.sprite.Sprite):
     
     def resize(self, width, height):
         img_copy = self.image.copy()
+        x = self.rect.x
+        y = self.rect.y
         self.image = pygame.transform.scale(img_copy, (width, height))
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
     
     def draw_hitbox(self, thickness):
         pygame.draw.rect(mw, (255, 0, 0), self.rect, thickness)
@@ -83,13 +87,19 @@ star = Character('hero.png', 4)
 star.resize(41, 49)
 bg = Sprite("background.png")
 score = Label("0", 10, 10, (255,255,255), 70)
-platforms = list()
+
+# создание платформ
+p = Sprite('platform.png', 0, 690)
+p.resize(1280, 20)
+platforms = [p]
 
 while runtime: 
     bg.draw(mw)
     star.draw(mw)
     # star.draw_hitbox(2)
     score.draw(mw)
+    for p in platforms:
+        p.draw(mw)
 
     events = pygame.event.get()
     star.move(pygame.key.get_pressed())
