@@ -61,7 +61,7 @@ class Character(Sprite):
             self.rect.x -= self.speed
         if keys[pygame.K_d]:
             if not self.right_view:
-                self.right_view = False
+                self.right_view = True
                 self.flip(1, 0)
             self.rect.x += self.speed
         if keys[pygame.K_w]:
