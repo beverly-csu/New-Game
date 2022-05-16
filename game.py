@@ -52,6 +52,7 @@ class Character(Sprite):
         super().__init__(filename)
         self.speed = speed
         self.right_view = True
+        self.is_ground = False
 
     def move(self, keys):
         if keys[pygame.K_a]:
@@ -66,6 +67,15 @@ class Character(Sprite):
             self.rect.x += self.speed
         if keys[pygame.K_w]:
             pass
+        if not self.is_ground:
+            self.rect.y += self.speed
+
+    def check_ground(self, platforms):
+        self.is_ground = False
+        for p in platforms:
+            if self.rect.colliderect(p.rect):
+                self.is_ground = True
+                break
 
 
 
@@ -73,6 +83,7 @@ star = Character('hero.png', 4)
 star.resize(41, 49)
 bg = Sprite("background.png")
 score = Label("0", 10, 10, (255,255,255), 70)
+platforms = list()
 
 while runtime: 
     bg.draw(mw)
@@ -82,6 +93,7 @@ while runtime:
 
     events = pygame.event.get()
     star.move(pygame.key.get_pressed())
+    star.check_ground(platforms)
     for event in events:
         if event.type == pygame.QUIT:
             runtime = False
