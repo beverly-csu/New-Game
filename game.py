@@ -83,8 +83,7 @@ class Character(Sprite):
 
 
 
-star = Character('hero.png', 4)
-star.resize(41, 49)
+star = Character('star.png', 4)
 bg = Sprite("background.png")
 score = Label("0", 10, 10, (255,255,255), 70)
 
